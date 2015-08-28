@@ -1,0 +1,18 @@
+$TTL 7200
+; domain.tld
+@       IN      SOA     {{host_name}}.{{root_domain}}. postmaster.{{root_domain}} (
+                                        {{ ansible_date_time.epoch }} ; Serial
+                                        28800      ; Refresh
+                                        1800       ; Retry
+                                        604800     ; Expire - 1 week
+                                        86400 )    ; Minimum
+{% for host in groups['vsvs-center'] %}
+                IN      NS      {{ hostvars[host].host_name }} 
+{{ hostvars[host].host_name }}      IN      A       {{ hostvars[host].ipv4_addr }}
+{% endfor %}
+
+{% for host in groups['vsvs-portal'] %}
+{% if host not in groups['vsvs-center'] %}
+{{ hostvars[host].host_name }}      IN      A       {{ hostvars[host].ipv4_addr }}
+{% endif %}
+{% endfor %}

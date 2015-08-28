@@ -1,0 +1,225 @@
+---
+- name: Deploy redis, mariadb and bind to center host(CentOS 7)
+  hosts: vsvs-center
+  vars_files:
+    - config.yml
+  tasks:
+    - include: tasks/common.yaml
+
+    - name: Enable EPEL
+      yum: name=epel-release
+
+    - name: Install packages
+      yum: name={{ item }}
+      with_items:
+        - mariadb
+        - mariadb-server
+        - redis
+        - MySQL-python
+        - bind
+
+    - name: Start and enable services
+      service: >
+        name={{ item }}
+        enabled=yes
+        state=started
+      with_items:
+        - redis
+        - mariadb
+        - named
+        - firewalld
+
+    - name: Create database
+      mysql_db: name={{ db_name }}
+
+    - name: Add user of database
+      mysql_user: >
+        name={{ db_username }}
+        host={{ hostvars[item].ipv4_addr }}
+        password={{ db_password }}
+        priv=vsvs.*:ALL
+      with_items: "{{ groups['vsvs-portal'] }}"
+
+    - name: Config redis
+      template: >
+        dest=/etc/redis.conf
+        src=template/redis.conf.j2
+        owner=root
+        group=root
+        mode=u=rw,g=r,o=r
+      notify: Restart redis
+
+    - name: Config hosts
+      template: >
+        src=template/hosts.j2
+        dest=/etc/hosts
+        owner=root
+        group=root
+        mode=u=rw,g=r,o=r
+
+    - name: Config named(bind9)
+      copy: >
+        src=files/named.conf
+        dest=/etc/named.conf
+        owner=root
+        group=root
+        mode=u=rw,g=r,o=r
+      notify: Restart named
+
+    - name: Config domain config
+      template: >
+        src=template/vsvs.named.conf.j2
+        dest=/etc/named/vsvs.conf
+        owner=root
+        group=root
+        mode=u=rw,g=r,o=r
+      notify: Restart named
+
+    - name: Config zone file
+      template: >
+        src=template/vsvs.named.zone.j2
+        dest=/etc/named/vsvs.zone
+        owner=root
+        group=root
+        mode=u=rw,g=r,o=r
+      notify: Restart named
+
+    - name: Config firewalld to allow connections of mariadb and redis
+      firewalld: >
+        rich_rule='rule family=ipv4 source address="{{ hostvars[item[0]].ipv4_addr }}" port port="{{ item[1] }}" protocol="tcp" accept'
+        permanent=true
+        state=enabled
+      with_nested:
+        - "{{ groups['vsvs-portal'] }}"
+        - ['3306', '6379']
+      notify: Restart firewalld
+
+    - name: Allow DNS requests
+      firewalld: service=dns permanent=true state=enabled
+      notify: Restart firewalld
+
+  handlers:
+    - name: Restart redis
+      service: name=redis state=restarted
+
+    - name: Restart firewalld
+      service: name=firewalld state=restarted
+
+    - name: Restart named
+      service: name=named state=restarted
+
+- name: Deploy redis and mariadb to center host(CentOS 7)
+  hosts: vsvs-portal
+  vars_files:
+    - config.yml
+  vars:
+    force_install: False
+    runner: runner
+    vsvs_path: /home/{{ runner }}/vsvs
+  gather_facts: no
+  tasks:
+    - include: tasks/common.yaml
+
+    - name: Enable EPEL
+      yum: name=epel-release
+
+    - name: Create user
+      user: name={{ runner }}
+
+    - name: Upload deploy key
+      template: >
+        dest=~{{ runner }}/deploy_key
+        src=files/deploy_key
+        mode=u=rw,g=,o=
+      become: yes
+      become_user: "{{ runner }}"
+
+    - name: Install git
+      yum: name=git
+
+    - name: Clone code from gitlab
+      git: >
+        dest={{ vsvs_path }}
+        repo="git@git.tunel.edu.cn:hotpxl/vsvs.git"
+        key_file=~{{ runner }}/deploy_key
+        accept_hostkey=yes
+        force=yes
+        version={{ branch|default('master') }}
+      become: yes
+      become_user: "{{ runner }}"
+      register: git_update
+
+    - name: Install npm
+      yum: name=npm
+
+    - name: Install global nodejs packages
+      npm: name={{ item }} global=yes
+      with_items:
+        - pm2
+        - coffee-script
+        - bower
+        - grunt-cli
+
+    - name: install dependencies from npm
+      npm: path={{ vsvs_path }} state=latest
+      become: yes
+      become_user: "{{ runner }}"
+      when: git_update.changed or force_install
+
+    - name: install dependencies from bower
+      bower: path={{ vsvs_path }} state=latest
+      become: yes
+      become_user: "{{ runner }}"
+      when: git_update.changed or force_install
+
+    - name: Config vsvs
+      template: >
+        dest={{ vsvs_path }}/backend/config.json
+        src=template/config.json.j2
+        owner={{ runner }}
+        group={{ runner }}
+        mode=u=rw,g=,o=
+      become: yes
+      become_user: "{{ runner }}"
+      register: config_vsvs
+
+    - name: Grunt install
+      command: /usr/bin/grunt install
+      args:
+        chdir: "{{ vsvs_path }}"
+      become: yes
+      become_user: "{{ runner }}"
+      when: git_update.changed or force_install
+
+    - name: Config auto start of pm2
+      command: /usr/bin/pm2 startup systemd
+
+    - name: get running list from pm2
+      command: /usr/bin/pm2 jlist
+      register: pm2_list_output
+
+    - set_fact:
+        pm2_list: "{{ pm2_list_output.stdout | from_json }}"
+
+    - debug: var=pm2_list
+
+    - name: Update running process (If vsvs is running or updated)
+      command: /usr/bin/pm2 restart app.pm2.json
+      when: pm2_list and (git_update.changed or config_vsvs.changed or force_install)
+
+    - name: Start script with pm2 (If vsvs is not running)
+      command: /usr/bin/pm2 start app.pm2.json
+      args:
+        chdir: "{{ vsvs_path }}/backend"
+      when: not pm2_list
+
+    - name: Start and enable firewalld
+      service: name=firewalld state=started enabled=yes
+
+    - name: Enable http access
+      firewalld: service=http state=enabled permanent=true
+      notify: Restart firewalld
+
+  handlers:
+    - name: Restart firewalld
+      service: name=firewalld state=restarted

@@ -1,0 +1,13 @@
+{% set center_host = hostvars[groups['vsvs-center'][0]].ipv4_addr %}
+{
+    "db":"mysql://{{ db_username }}:{{ db_password }}@{{ center_host }}/{{ db_name }}",
+    "rootDomain":".{{ root_domain }}",
+    "redisForSession": {
+        "host":"{{ center_host }}",
+        "password":"{{ redis_password }}"
+    },
+    "gid": "{{ runner }}",
+    "uid": "{{ runner }}",
+    "port": 80,
+    "debug": true
+}

@@ -1,0 +1,7 @@
+fixtures:
+  - model: User
+    keys: ["username"]
+    data:
+      username: admin
+      password: change me
+      role: admin

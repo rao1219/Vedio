@@ -1,0 +1,194 @@
+doctype html
+html(lang="en" ng-app="vsvs")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatble" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    //- Jquery is loaded before angular so that it could be taken use of by angular
+    script(src="./third_party/jquery/dist/jquery.min.js" defer)
+
+    script(src="./third_party/angular/angular.min.js" defer)
+    script(src="./third_party/angular-resource/angular-resource.min.js" defer)
+    script(src="./third_party/ng-file-upload/ng-file-upload.js" defer)
+    script(src="./third_party/angular-ui-router/release/angular-ui-router.js" defer)
+    script(src="./third_party/ngprogress-lite/ngprogress-lite.js" defer)
+    script(src="./third_party/angular-gettext/dist/angular-gettext.js" defer)
+    script(src="./third_party/angular-bootstrap/ui-bootstrap-tpls.js" defer)
+    script(src="./third_party/angular-toastr/dist/angular-toastr.tpls.js" defer)
+
+    script(src="./scripts/vsvs.js" defer)
+    script(src="./scripts/root-controller.js" defer)
+    script(src="./scripts/session-controller.js" defer)
+    script(src="./scripts/main-controller.js" defer)
+    script(src="./scripts/auth-service.js" defer)
+    script(src="./scripts/user-service.js" defer)
+    script(src="./scripts/state.js" defer)
+
+
+    link(rel="stylesheet" href="./third_party/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="./third_party/fontawesome/css/font-awesome.css")
+    link(rel="stylesheet" href="./third_party/ngprogress-lite/ngprogress-lite.css")
+    link(rel="stylesheet" href="./third_party/angular-toastr/dist/angular-toastr.css")
+
+    link(rel="stylesheet" href="./styles/sticky-footer.css")
+    link(rel="stylesheet" href="./styles/navbar-height.css")
+    link(rel="stylesheet" href="./styles/upload-drop-zone.css")
+
+
+    title VSVS
+  body(ng-controller="MainController as mainCtrl")
+    nav.navbar.navbar-default.navbar-static-top.vsvs-navbar-sm
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(ui-sref="home" translate)
+            | VSVS
+
+        #navbar
+          ul.nav.navbar-nav.navbar-left(ng-controller="LanguageController as lang")
+            li
+              a(href="#" translate ng-click="lang.setLanguage('en')") English
+            li
+              a(href="#" translate ng-click="lang.setLanguage('zh')") Chinese
+            li
+              a(ui-sref="restricted") Restricted page
+            li
+              a(href='#') Doct
+            li
+              a(href='index.html') back
+            li
+              a(href='sign.html') test-sign
+            li
+              span.glyphicon.glyphicon-pushpin(aria-hidden='true')
+          .navbar-form.navbar-right.btn-group.btn-group-sm
+            button.btn.btn-default(type="button")
+              i.fa.fa-bell
+            button.btn.btn-default(type="button" ui-sref="upload")
+              i.fa.fa-upload
+              translate
+                | Upload
+            button.btn.btn-default(type="button" ui-sref="login")
+              i.fa.fa-user
+
+          //-form.navbar-form-alt
+          form.navbar-form.navbar-right
+            .form-group
+              .input-group.input-group-sm
+                input.form-control(type="text" placeholder="{{'Search text here'|translate}}")
+                .input-group-btn
+                  button.btn.btn-default(type="button")
+                    i.fa.fa-search
+    #dview
+    .jumbotron
+      .page-header
+      h1 Doctor Container list 
+        span.glyphicon.glyphicon-pushpin(aria-hidden='true')
+          .navbar-form.navbar-right.btn-group.btn-group-sm
+
+         img.img-thumbnail(data-src='holder.js/200x200', alt='200x200', src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzIwMHgyMDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNGYzYjE4NjNjYSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE0ZjNiMTg2M2NhIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTA0LjUiPjIwMHgyMDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=', data-holder-rendered='true', style='width: 200px; height: 200px;')
+
+      p
+        | This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.
+
+    #dlog
+    .experimental
+      p Current Doctor: {{mainCtrl.currentSession.username}}
+
+      .alert.alert-danger(role='alert')
+       strong Oh take care!
+       |  You can here to control your patient txt !
+
+      p ID: {{mainCtrl.currentSession.userID}}
+      p rol: {{mainCtrl.currentSession.userRole}}
+      hr
+      button(ng-click="login()") Login mock
+      div(ng-switch on="currentUser.role")
+        div(ng-switch-when="admin") You are admin.
+        div(ng-switch-when="reviewer") You are reviewer.
+        div(ng-switch-when="publisher") You are publisher.
+        div(ng-switch-when="guest") You are guest.
+        div(ng-switch-default) You are nothing.
+
+
+    //- .page-header
+    //-   h1 Doctor Container list 
+    //-   h2 Hello doctor ~ you can here to control your patient detial !
+    //-   p (including two ways)              And here is your photo
+    //-      img.img-thumbnail(data-src='holder.js/200x200', alt='200x200', src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzIwMHgyMDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNGYzYjE4NjNjYSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE0ZjNiMTg2M2NhIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTA0LjUiPjIwMHgyMDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=', data-holder-rendered='true', style='width: 200px; height: 200px;')
+
+    div #d-list
+        .row
+      .col-md-6
+        table.table
+          thead
+            tr
+              th #
+              th First Name
+              th Last Name
+              th Username
+          tbody
+            tr
+              td 1
+              td Mark
+              td Otto
+              td @mdo
+            tr
+              td 2
+              td Jacob
+              td Thornton
+              td @fat
+            tr
+              td 3
+              td Larry
+              td the Bird
+              td @twitter
+      .col-md-6
+        table.table.table-striped
+          thead
+            tr
+              th #
+              th First Name
+              th Last Name
+              th Username
+          tbody
+            tr
+              td 1
+              td Mark
+              td Otto
+              td @mdo
+            tr
+              td 2
+              td Jacob
+              td Thornton
+              td @fat
+            tr
+              td 3
+              td Larry
+              td the Bird
+              td @twitter
+            tr 
+              td 4
+              td showcasing
+              td  The care
+              td @ling
+     nav
+      ul.pager
+        li.previous.disabled
+          a(href='#')
+            span(aria-hidden='true') ←
+            |  Older
+        li.next
+          a(href='#')
+            | Newer 
+            span(aria-hidden='true') →
+      div
+        input(type="text" ng-model="inputID")
+        p {{inputIDData}}
+        button.btn.btn-default(ng-click="mainCtrl.getProfile(inputID)") Get Profile
+        input(type="text" ng-model="newPassword")
+        button.btn.btn-default(ng-click="mainCtrl.updateProfile(inputID, newPassword)") Change Password
+  
+    .container
+      section(ui-view)
+    footer.footer(translate)
+      | &copy; TUNEL 2015

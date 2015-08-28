@@ -1,0 +1,12 @@
+{
+  "name"             : "vsvs",
+  "script"           : "../bin/www",
+  "instances"        : 1,
+  "merge_logs"       : true,
+  "exec_mode"        : "fork",
+  "autorestart"      : true,
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "*"
+  }
+}

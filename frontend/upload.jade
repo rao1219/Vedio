@@ -1,0 +1,23 @@
+.row(ng-controller="UploadController as upload")
+  button.btn.btn-sm.btn-primary.pull-right#js-upload-submit(translate)
+    | Finish Uploading
+
+  h4(translate) Upload video files
+  .upload-drop-zone#drop-zone(ngf-drop ngf-change="upload.addFile($files)" ngf-multiple="true" ngf-drag-over-class="drop" ngf-allow-dir="false" ngf-accept="upload.validate($file)")
+    .upload-drop-inner
+      label
+        button.btn.btn-default(translate ngf-select ngf-multiple="true" ngf-change="upload.addFile($files)" ngf-accept="upload.validate($file)") Select files to upload
+      br
+      translate
+        | Or drag and drop files here
+
+  progressbar.progress-striped.active(value="progress" type="info")
+    | {{ progress }}% Complete
+
+  .js-upload-finished
+    h3(translate) File list
+    .list-group
+      a.list-group-item.list-group-item-warning(href="#" ng-repeat="file in fileList")
+        span.badge.alert-warning
+          | {{ file.status }}
+        | {{ file.name }}

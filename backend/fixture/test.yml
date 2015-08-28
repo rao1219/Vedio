@@ -1,0 +1,21 @@
+fixtures:
+  - model: User
+    keys: ["username"]
+    data:
+      username: reviewer
+      password: change me
+      role: reviewer
+
+  - model: User
+    keys: ["username"]
+    data:
+      username: uploader
+      password: change me
+      role: uploader
+
+  - model: User
+    keys: ["username"]
+    data:
+      username: tester
+      password: does_not_matter
+      role: viewer

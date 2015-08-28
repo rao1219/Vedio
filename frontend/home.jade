@@ -1,0 +1,305 @@
+link(rel="stylesheet" href="./styles/index.css")
+
+html
+  body
+    .container-fluid
+      .row
+        .col-md-12
+          #carousel-683961.carousel.slide
+            ol.carousel-indicators
+              li(data-slide-to='0', data-target='#carousel-683961')
+              li(data-slide-to='1', data-target='#carousel-683961')
+              li.active(data-slide-to='2', data-target='#carousel-683961')
+            .carousel-inner
+              .item
+                img(alt='Carousel Bootstrap First', src='http://lorempixel.com/output/sports-q-c-1600-500-1.jpg')
+                .carousel-caption
+                  h4
+                    | First Thumbnail label
+                  p
+                    | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+              .item
+                img(alt='Carousel Bootstrap Second', src='http://lorempixel.com/output/sports-q-c-1600-500-2.jpg')
+                .carousel-caption
+                  h4
+                    | Second Thumbnail label
+                  p
+                    | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+              .item.active
+                img(alt='Carousel Bootstrap Third', src='http://lorempixel.com/output/sports-q-c-1600-500-3.jpg')
+                .carousel-caption
+                  h4
+                    | Third Thumbnail label
+                  p
+                    | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            a.left.carousel-control(href='#carousel-683961', data-slide='prev')
+              span.glyphicon.glyphicon-chevron-left
+            a.right.carousel-control(href='#carousel-683961', data-slide='next')
+              span.glyphicon.glyphicon-chevron-right
+
+      script(src='./third_party/jquery/jquery.SuperSlide.js')
+      script.
+        $(function(){
+        $(".j-index-slide").slide({
+        mainCell:"#slide .slide_ul",
+        effect:"leftLoop",
+        prevCell:".show_pre",
+        nextCell:".show_next",
+        titCell:"#tips li",
+        titOnClassName:"cur",
+        interTime:"5000",
+        autoPlay:true
+        });
+        });
+    .cover-page-index.fl.wfs.pt50.bcf2
+      .cover-page-wrapper
+        .boutique.boutique-index.fl.wfs
+          h3 Video Overview
+          .canvas
+            ul.items(style='width: 1222px;')
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=pink', style='position:relative;')
+                  img(src='style/images/3.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=pink') Take you to Disney with our lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light pink
+                    p.price-attente
+                      | Price:248$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=cool', style='position:relative;')
+                  img(src='style/images/2.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=cool') Save energy,be cool with the environment
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light cool
+                    p.price-attente
+                      | Price:236$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=sport', style='position:relative;')
+                  img(src='upload/item1.jpg', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=sport') Open your mind,Brighten your life
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light sport
+                    p.price-attente
+                      | Price:245$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=huge', style='position:relative;')
+                  img(src='style/images/4.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=huge') The big world,the huge-lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light huge
+                    p.price-attente
+                      | Price:366$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=pink', style='position:relative;')
+                  img(src='style/images/3.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=pink') Take you to Disney with our lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light pink
+                    p.price-attente
+                      | Price:248$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=cool', style='position:relative;')
+                  img(src='style/images/2.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=cool') Save energy,be cool with the environment
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light cool
+                    p.price-attente
+                      | Price:236$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=sport', style='position:relative;')
+                  img(src='upload/item1.jpg', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=sport') Open your mind,Brighten your life
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light sport
+                    p.price-attente
+                      | Price:245$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=huge', style='position:relative;')
+                  img(src='style/images/4.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=huge') The big world,the huge-lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light huge
+                    p.price-attente
+                      | Price:366$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+        .boutique.boutique-index.fl.wfs
+          h3 New products:
+          .canvas
+            ul.items(style='width: 1222px;')
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=pink', style='position:relative;')
+                  img(src='style/images/3.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=pink') Take you to Disney with our lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light pink
+                    p.price-attente
+                      | Price:248$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=cool', style='position:relative;')
+                  img(src='style/images/2.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=cool') Save energy,be cool with the environment
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light cool
+                    p.price-attente
+                      | Price:236$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=sport', style='position:relative;')
+                  img(src='upload/item1.jpg', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=sport') Open your mind,Brighten your life
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light sport
+                    p.price-attente
+                      | Price:245$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+              li.items-li.j-items-li
+                a(target='_blank', href='/elight/ProductServelet?type=huge', style='position:relative;')
+                  img(src='style/images/4.gif', title='商品TITLE')
+                .wrap_div
+                  div
+                    b.title
+                      a(target='_blank', href='/elight/ProductServelet?type=huge') The big world,the huge-lamp
+                    span.description
+                      a(href='category.jsp', target='_blank', title='') E-light huge
+                    p.price-attente
+                      | Price:366$
+                      br
+                      | city:Beijing
+                p.price-attente
+                  span.price
+                  span.attente(title='浏览量') 258
+        .church.fl.wfs.mt50
+          dl.reputation.fl
+            dt.title
+              span.h3
+                a.title-a(href='#', target='_blank') Communication
+              i
+            dd.fl.wfs
+              a.template-community.fl(target='_blank', href='#') Community
+              p.items.fl
+                a.fl.wfs(target='_blank', href='#') Good~~Good~~
+                a.fl.wfs(target='_blank', href='#') Good~~Good~~
+                a.fl.wfs(target='_blank', href='#') Good~~Good~~
+                a.fl.wfs(target='_blank', href='#') Good~~Good~~~
+          dl.knowledge.fl
+            dt.title
+              span.h3
+                a.title-a(target='_blank', href='#') Get-help
+              i
+              a.more.fr(target='_blank', href='#')
+                span more
+            dd.fl.wfs
+              b
+                a(target='_blank', href='#') How to purchase our product~
+              b
+                a(target='_blank', href='#') How to purchase our product~
+              b
+                a(target='_blank', href='#') How to purchase our product~
+              b
+                a(target='_blank', href='#') How to purchase our product~
+              b
+                a(target='_blank', href='#') How to purchase our product~
+          dl.letters.fl
+            dt.title
+              span.h3
+                a.title-a(target='_blank', href='#') News
+              i
+              a.more.fr(target='_blank', href='#')
+                span more
+            dd.fl.wfs
+              b
+                a(target='_blank', href='#') Welcome to VSVS~~
+              b
+                a(target='_blank', href='#') Welcome to VSVS~~
+              b
+                a(target='_blank', href='#') Welcome to VSVS~~
+              b
+                a(target='_blank', href='#') Welcome to VSVS~~
+              b
+                a(target='_blank', href='#') Welcome to VSVS~~
+

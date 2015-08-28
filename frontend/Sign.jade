@@ -1,0 +1,192 @@
+doctype html
+html(lang="en" ng-app="vsvs")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatble" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    //- Jquery is loaded before angular so that it could be taken use of by angular
+    script(src="./third_party/jquery/dist/jquery.min.js" defer)
+
+    script(src="./third_party/angular/angular.min.js" defer)
+    script(src="./third_party/angular-resource/angular-resource.min.js" defer)
+    script(src="./third_party/ng-file-upload/ng-file-upload.js" defer)
+    script(src="./third_party/angular-ui-router/release/angular-ui-router.js" defer)
+    script(src="./third_party/ngprogress-lite/ngprogress-lite.js" defer)
+    script(src="./third_party/angular-gettext/dist/angular-gettext.js" defer)
+    script(src="./third_party/angular-bootstrap/ui-bootstrap-tpls.js" defer)
+    script(src="./third_party/angular-toastr/dist/angular-toastr.tpls.js" defer)
+
+    script(src="./scripts/vsvs.js" defer)
+    script(src="./scripts/root-controller.js" defer)
+    script(src="./scripts/session-controller.js" defer)
+    script(src="./scripts/main-controller.js" defer)
+    script(src="./scripts/auth-service.js" defer)
+    script(src="./scripts/user-service.js" defer)
+    script(src="./scripts/state.js" defer)
+
+
+    link(rel="stylesheet" href="./third_party/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="./third_party/fontawesome/css/font-awesome.css")
+    link(rel="stylesheet" href="./third_party/ngprogress-lite/ngprogress-lite.css")
+    link(rel="stylesheet" href="./third_party/angular-toastr/dist/angular-toastr.css")
+
+    link(rel="stylesheet" href="./styles/sticky-footer.css")
+    link(rel="stylesheet" href="./styles/navbar-height.css")
+    link(rel="stylesheet" href="./styles/upload-drop-zone.css")
+
+
+    title VSVS
+  body(ng-controller="MainController as mainCtrl")
+    nav.navbar.navbar-default.navbar-static-top.vsvs-navbar-sm
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(ui-sref="home" translate)
+            | VSVS
+
+        #navbar
+          ul.nav.navbar-nav.navbar-left(ng-controller="LanguageController as lang")
+            li
+              a(href="#" translate ng-click="lang.setLanguage('en')") English
+            li
+              a(href="#" translate ng-click="lang.setLanguage('zh')") Chinese
+            li
+              a(ui-sref="restricted") Restricted page
+            li
+              a(href='doct-control.html') Doct
+            li
+              a(href='index.html') back
+            li
+              a(href='test.html') test
+            li
+              span.glyphicon.glyphicon-pushpin(aria-hidden='true')
+          .navbar-form.navbar-right.btn-group.btn-group-sm
+            button.btn.btn-default(type="button")
+              i.fa.fa-bell
+            button.btn.btn-default(type="button" ui-sref="upload")
+              i.fa.fa-upload
+              translate
+                | Upload
+            button.btn.btn-default(type="button" ui-sref="login")
+              i.fa.fa-user
+
+          //-form.navbar-form-alt
+          form.navbar-form.navbar-right
+            .form-group
+              .input-group.input-group-sm
+                input.form-control(type="text" placeholder="{{'Search text here'|translate}}")
+                .input-group-btn
+                  button.btn.btn-default(type="button")
+                    i.fa.fa-search
+      
+    #content.bs-docs-header(tabindex='-1')
+    .container
+      h1 注册 sign in ——
+         span.glyphicon.glyphicon-user(aria-hidden='true')
+      p Please add your message here to get more detials and more serve
+      p 请填写个人相关信息获取更多信息以及服务。
+      legend Warning 
+
+
+    .btn-group.btn-group-justified(role='group', aria-label='...')
+      a.btn.btn-default(href='#') Doctor
+      a.btn.btn-default(href='#') Server
+      a.btn.btn-default.active(href='#') Patient
+      a.btn.btn-default.disabled(href='#') Hign Doc
+
+    form.form-horizontal(action='', role='form')
+      fieldset
+        legend 
+        .form-group
+          label.control-label.col-md-3(for='name-1') Please enter your name 
+          .col-md-9
+            input#name-1.form-control(type='text', name='', placeholder='Last name')
+            br
+            input#name-2.form-control(type='text', name='', placeholder='First name')
+            .alert.alert-warning | Not complete name entering
+
+        .form-group
+          label.control-label.col-md-3(for='sex-1') chose your sex
+          .col-md-9
+            .radio
+              label
+                input#sex-1(type='radio', name='sex')
+                | Male
+            .radio
+              label
+                input#sex-2(type='radio', name='sex')
+                | Famle
+
+        .form-group
+          label.control-label.col-md-3(for='love-1') chose your prefer Doc
+          .col-md-9
+            .checkbox
+              label
+                input#love-1(type='checkbox', name='love')
+                | Self treated
+            .checkbox
+              label
+                input#love-2(type='checkbox', name='love')
+                | Doc-1
+            .checkbox
+              label
+                input#love-3(type='checkbox', name='love')
+                | Doc-2
+            .checkbox
+              label
+                input#love-4(type='checkbox', name='love')
+                | Doc-3
+            .checkbox
+              label
+                input#love-5(type='checkbox', name='love')
+                | Doc-4
+        .form-group
+          label.control-label.col-md-3(for='time-1') Choose your vist time
+          .col-md-9
+            select#time-1.form-control(name='')
+              option(value='1') First without invited
+              option(value='2') First and have been invited
+              option(value='3') Have been contected
+            br
+            select#time-2.form-control(name='')
+              option(value='1') Just for callback
+              option(value='2') Willing for video
+              option(value='3') Long contact wiht Doc
+        .form-group
+          label.control-label.col-md-3(for='desc') Please enter your Disease Description
+          .col-md-9
+            textarea.form-control(rows='4', placeholder='Disease Description by normal days')
+            br
+            textarea.form-control(rows='4', placeholder='Disease Description by latest Doctor')
+        .text-center
+          button.btn.btn-primary  Submit
+
+    #content.resignin
+    .alert.alert-danger(role='alert')
+      span.glyphicon.glyphicon-exclamation-sign(aria-hidden='true')
+      span.sr-only Error:
+      |   Enter a valid email address
+
+
+    div
+           .bs-example(data-example-id='glyphicons-general')
+      .btn-toolbar(role='toolbar')
+        .btn-group
+          button.btn.btn-default(type='button', aria-label='Left Align')
+            span.glyphicon.glyphicon-align-left(aria-hidden='true')
+          button.btn.btn-default(type='button', aria-label='Center Align')
+            span.glyphicon.glyphicon-align-center(aria-hidden='true')
+          button.btn.btn-default(type='button', aria-label='Right Align')
+            span.glyphicon.glyphicon-align-right(aria-hidden='true')
+          button.btn.btn-default(type='button', aria-label='Justify')
+            span.glyphicon.glyphicon-align-justify(aria-hidden='true')
+      .btn-toolbar(role='toolbar')
+        button.btn.btn-default.btn-sm(type='button')
+          span.glyphicon.glyphicon-star(aria-hidden='true')
+          |  Star
+
+
+    .container
+      section(ui-view)
+    footer.footer(translate)
+      | &copy; TUNEL 2015

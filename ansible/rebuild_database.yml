@@ -1,0 +1,14 @@
+---
+
+- name: Destroy database and recreate it.
+  hosts: vsvs-center
+  vars_files:
+    - config.yml
+  gather_facts: no
+  tasks:
+    - name: Destroy database
+      mysql_db: name={{ db_name }} state=absent
+      ignore_errors: yes
+
+    - name: Recreate database
+      mysql_db: name={{ db_name }} state=present

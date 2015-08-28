@@ -1,0 +1,13 @@
+.row
+  form.col-md-offset-4.col-md-4.col-sm-offset-4.col-sm-4(ng-controller="SessionController as sessionCtrl" ng-submit="sessionCtrl.login(username, password)" novalidate)
+    .form-group
+      label(for="username" translate) Username
+      input.form-control#username(type="text" ng-model="username")
+    .form-group
+      label(for="password" translate) Password
+      input.form-control#password(type="password" ng-model="password")
+
+    .form-group
+      button.btn.btn-primary(type="submit" translate) Login
+      button.btn.btn-default(type="button" ng-click="sessionCtrl.logout()") Logout
+      // button.btn.btn-default.pull-right(type="button" ng-click="login.register(username, password)" translate) Register

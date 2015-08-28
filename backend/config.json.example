@@ -1,0 +1,12 @@
+{
+    "db":"mysql://root:root@localhost/cms",
+    "rootDomain":".vsvs.com",
+    "redisForSession": {
+        "path":"./redis.sock",
+        "password":"vsvsROCK!"
+    },
+    "gid": "somegroup",
+    "uid": "someuser",
+    "port": 2333,
+    "debug": false
+}

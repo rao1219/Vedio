@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2015-07-01 14:45+0800\n"
+"Last-Translator:  <huiyiqun@gmail.com>\n"
+"Language-Team: Chinese\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: public/index.html:1
+msgid "&copy; TUNEL 2015"
+msgstr ""
+
+#: public/index.html:1
+msgid "Chinese"
+msgstr "中文"
+
+#: public/index.html:1
+msgid "English"
+msgstr "英语"
+
+#: public/scripts/vsvs.js:81
+msgid "Failed: {{filename}} is not valid video."
+msgstr "失败：{{filename}}不是合法的视频文件。"
+
+#: public/upload.html:1
+msgid "File list"
+msgstr "文件列表"
+
+#: public/upload.html:1
+msgid "Finish Uploading"
+msgstr "上传结束"
+
+#: public/login.html:1
+msgid "Login"
+msgstr "登录"
+
+#: public/upload.html:1
+msgid "Or drag and drop files here"
+msgstr "或者拖拽文件到这"
+
+#: public/login.html:1
+msgid "Password"
+msgstr "密码"
+
+#: public/login.html:1
+msgid "Register"
+msgstr "注册"
+
+#: public/scripts/vsvs.js:41
+msgid "register as {{username}}:{{password}}"
+msgstr "注册为{{username}}:{{password}}"
+
+#: public/index.html:1
+msgid "Search text here"
+msgstr "搜索文本在这"
+
+#: public/upload.html:1
+msgid "Select files to upload"
+msgstr "选择上传的文件"
+
+#: public/scripts/vsvs.js:76
+msgid "Success: {{filename}} is uploading."
+msgstr "成功：{{filename}}上传中。"
+
+#: public/index.html:1
+msgid "Upload"
+msgstr "上传"
+
+#: public/upload.html:1
+msgid "Upload video files"
+msgstr "上传视频文件"
+
+#: public/login.html:1
+msgid "Username"
+msgstr "用户名"
+
+#: public/index.html:1
+msgid "VSVS"
+msgstr ""
